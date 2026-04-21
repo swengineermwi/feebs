@@ -3,11 +3,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: {
+    main: './src/index.js',
+    privacy: './src/privacy.js',
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Template',
       template: './src/index.html',
+      filename: 'index.html',
+      chunks: ["main"]
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Privacy Policy',
+      template: './src/policies/privacy.html',
+      filename: 'policies/privacy.html',
+      chunks: ["privacy"]
     }),
   ],
   devServer: {
@@ -26,7 +37,7 @@ module.exports = {
     ],
   },
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'public'),
   },
 };
